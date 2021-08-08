@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper{
+    width: 50%;
+    height: 80vh;
+    margin: auto;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+}
+.wrapper h1{
+    background-color: #710844;
+    color: #fff;
+    text-align: center;
+    padding: 4rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1.5rem;
+}
+.content{
+    width: 90%;
+    margin: 4rem auto 0rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #710844;
+}
+.content .line{
+    width: 2px;
+    height: 30vh;
+    background-color: #707070;
+}
+.textField, .radios, .theButton{
+    margin-bottom: 2rem;
+}
+input[type="text"] {
+    border: none;
+    outline: none;
+    border: 2px solid #710844;
+    border-radius: 35px;
+    padding: .5rem 2rem;
+}
+
+input[type="radio"]{
+    margin-right: 3rem;
+}
+.theButton .submit {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border: 2px solid #710844;
+    color: #710844;
+    padding: .5rem 2rem;
+    border-radius: 35px;
+    transition: all 300ms ease;
+}
+.theButton .submit:hover{
+    border: 2px solid #710844;
+    color: #ffffff;
+    background-color: #710844;
+    cursor: pointer;
+}
+.form-and-greeting .greet-result {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+}
+.counter-section{
+    text-align: center;
+    font-size: 1.5rem;
+}
+.counter-section #reset {
+    border: 0;
+    display: block;
+    color: #710844;
+    border-radius: 2rem;
+    background-color: aqua;
+    padding: 0.5rem 1rem;
+    width: 50%;
+    margin: auto;
+}
+
+#reset:hover{
+    color: #ffffff;
+    cursor: pointer;
+}
+.footer{
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    background-color: #710844;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.footer p{
+    letter-spacing: .5rem;
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+
+@media (max-width: 425px){
+    .wrapper {
+        width: 95%;
+        height: 100vh;
+        margin: auto;
+        position: relative;
+        background-color: #fff;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+    }
+    .wrapper h1 {
+        background-color: #710844 !important;
+        color: #fff !important;
+        text-align: center !important;
+        padding: 2rem !important;
+        text-transform: uppercase !important;
+        font-weight: 200 !important;
+        letter-spacing: .9rem !important;
+    }
+    .content {
+        width: 90%;
+        margin:  auto;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        color: #710844;
+    }
+    .content .line {
+        width: 70% !important;
+        height: 2px !important;
+        background-color: #707070;
+        margin: auto !important;
+    }
+    .content .counter-section p{
+        margin: .7rem;
+    }
+    input[type="radio"] {
+        margin-right: .9rem;
+    }
+    .form-and-greeting .greet-result {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .textField .enterName{
+        margin-right: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper h1 {
+        background-color: #710844;
+        color: #fff;
+        text-align: center;
+        padding: 2.5rem;
+        text-transform: uppercase;
+        font-weight: 200;
+    }
+    .content .line {
+        width: 2px;
+        height: 30vh;
+        background-color: #707070;
+        margin-left: .3rem;
+    }
+
+    input[type="radio"] {
+        margin-right: .3rem;
+    }
+
+    .counter-section #reset {
+        border: 0;
+        display: block;
+        color: #710844;
+        border-radius: 2rem;
+        background-color: aqua;
+        padding: 0.5rem 1rem;
+        width: 80%;
+        margin: auto;
+    }
+}

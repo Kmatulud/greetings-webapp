@@ -1,0 +1,39 @@
+<h1>Greeting</h1>
+    <div class="content">
+       <form action="/greetings" method="POST">
+            <div class="form-and-greeting">
+                <div class="textField">
+                    <label for="yourName" class="enterName">Your Name :</label>
+                    <input type="text" name="name" id="yourName" placeholder="Please enter your name" required>
+                </div>
+                <div class="radios">
+                    <label for="Sepedi">Sepedi</label>
+                    <input type="radio" name="language" value="Sepedi">
+                    <label for="Isizulu">IsiZulu</label>
+                    <input type="radio" name="language" value="Isizulu">
+                    <label for="English">English</label>
+                    <input type="radio" name="language" value="English">
+                </div>
+                <div class="greet-result">
+                    <p class="greeting">{{getGreetMessage}}{{getTheName}}</p>
+                </div>
+                <div class="theButton">
+                    <button type="submit" class="submit">Greet Me</button>
+                </div>
+       </form>
+        </div>
+        <span class="line"></span>
+
+       <form action="/greeted" method="POST">
+            <div class="counter-section">
+            <a href=""><p>Greeted Users:
+            </p></a>
+            <span class="count">{{countGreetedNames}}</span>
+            <button type="submit" id="reset">Reset</button>
+        </div>
+       </form>
+
+    </div>
+    </div>
+    <div class="footer">
+<p>Kgotso Matuludi &copy; 2021</p>
