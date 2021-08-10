@@ -6,11 +6,11 @@ describe("The Greetings Project", function () {
 	describe("Setting The Values", function () {
 		it("should greet user with their name", function () {
 			greetingfactory.setTheName("kgotso");
-			assert.equal("kgotso", greetingfactory.getTheName());
+			assert.equal("Kgotso", greetingfactory.getTheName());
 		});
 		it("should greet different user with their name", function () {
 			greetingfactory.setTheName("KAMOGELO");
-			assert.equal("kamogelo", greetingfactory.getTheName());
+			assert.equal("Kamogelo", greetingfactory.getTheName());
 		});
 
 		it("should be able to set language of greeting to Sepedi", () => {
@@ -33,19 +33,19 @@ describe("The Greetings Project", function () {
 	});
 	describe("Using The Values", function () {
 		it("should greet user in Sepedi if sepedi radio is chosen", function () {
-			greetingfactory.setLanguage("sepedi");
+			greetingfactory.setLanguage("Sepedi");
 			greetingfactory.setGreetMessage();
-			assert.equal("Dumela,", greetingfactory.getGreetMessage());
+			assert.equal("Dumela, ", greetingfactory.getGreetMessage());
 		});
 		it("should greet user in Isizulu if isizulu radio is chosen", function () {
-			greetingfactory.setLanguage("zulu");
+			greetingfactory.setLanguage("Isizulu");
 			greetingfactory.setGreetMessage();
-			assert.equal("Sawubona,", greetingfactory.getGreetMessage());
+			assert.equal("Sawubona, ", greetingfactory.getGreetMessage());
 		});
 		it("should greet user in English if english radio is chosen", function () {
-			greetingfactory.setLanguage("english");
+			greetingfactory.setLanguage("English");
 			greetingfactory.setGreetMessage();
-			assert.equal("Hello,", greetingfactory.getGreetMessage());
+			assert.equal("Hello, ", greetingfactory.getGreetMessage());
 		});
 		it("should store all the names greeted in an array", function () {
 			greetingfactory.setTheName("Kgotso");

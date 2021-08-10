@@ -1,5 +1,5 @@
 module.exports = function Greetings() {
-	var greetMessage = "Greeting will appear here";
+	var greetMessage;
 	var greetLanguage;
 	var greetedNames = [];
 	var nameOfUser;
@@ -29,10 +29,12 @@ module.exports = function Greetings() {
 		return greetMessage;
 	}
 	function setTheName(name) {
-		nameOfUser = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
+		nameOfUser = name;
 	}
 	function getTheName() {
-		return nameOfUser;
+		return (
+			nameOfUser.charAt(0).toUpperCase() + nameOfUser.toLowerCase().slice(1)
+		);
 	}
 	// function setNamesGreeted(theNames) {
 	// 	greetedNames.push(theNames);
