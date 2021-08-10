@@ -56,7 +56,7 @@ app.get("/greeted", (req, res) => {
 	// res.redirect("/");
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log("This App is listening on port:", PORT);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+	console.log("This App is listening on port:", port);
 });
