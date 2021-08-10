@@ -20,7 +20,7 @@ app.set("view engine", "handlebars");
 
 app.use(
 	session({
-		secret: "Se ke string saka",
+		secret: 'Se ke string saka',
 		resave: false,
 		saveUninitialized: true,
 	})
@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/greetings", (req, res) => {
-	let theName = greetings.setTheName(req.body.name);
+	greetings.setTheName(req.body.name);
 	greetings.setLanguage(req.body.language);
 	greetings.setGreetMessage();
 	// greetings.setNamesGreeted();
@@ -56,7 +56,7 @@ app.get("/greeted", (req, res) => {
 	// res.redirect("/");
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-	console.log("This App is listening on port:", port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log("This App is listening on port:", PORT);
 });
