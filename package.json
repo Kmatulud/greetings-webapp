@@ -21,6 +21,7 @@
     "express-session": "^1.17.2"
   },
   "devDependencies": {
+    "mocha": "^9.0.3",
     "nodemon": "^2.0.12"
   }
 }
