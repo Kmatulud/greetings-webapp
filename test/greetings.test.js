@@ -1,5 +1,9 @@
+const assert = require("assert");
+
+const Greetings = require("../greetings");
+
 describe("The Greetings Project", function () {
-	const greetingfactory = GreetFactory();
+	const greetingfactory = Greetings();
 	describe("Setting The Values", function () {
 		it("should greet user with their name", function () {
 			greetingfactory.setTheName("kgotso");
