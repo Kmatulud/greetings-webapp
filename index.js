@@ -48,9 +48,10 @@ app.post("/greetings", (req, res) => {
 
 	let getTheName = greetings.getTheName();
 	let language = greetings.getLanguage();
-	if (getTheName === undefined) {
+	if(getTheName === undefined) {
 		req.flash("error", "Please enter a name!");
-	}if (language === undefined) {
+	}
+	if(language === undefined) {
 		req.flash("error", "Name and Language cannot be empty!");
 	}
 	// else if (language === undefined && getTheName === undefined) {
