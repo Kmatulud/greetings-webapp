@@ -35,7 +35,8 @@ app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
 	res.render("index", {
-		 getTheName: greetings.getTheName(),
+		getTheName: greetings.getTheName(),
+		language: greetings.getLanguage(),
 		getGreetMessage: greetings.getGreetMessage(),
 		countGreetedNames: greetings.countGreetedNames(),
 	});
@@ -44,6 +45,18 @@ app.get("/", (req, res) => {
 app.post("/greetings", (req, res) => {
 	greetings.setTheName(req.body.name);
 	greetings.setLanguage(req.body.language);
+
+	let getTheName = greetings.getTheName();
+	let language = greetings.getLanguage();
+	if (getTheName === undefined) {
+		req.flash("error", "Please enter a name!");
+	} else if (language === undefined) {
+		req.flash("error", "Name and Language cannot be empty!");
+	}
+	// else if (language === undefined && getTheName === undefined) {
+	// 	req.flash("error", "Please choose a language!");
+	// }
+	
 	greetings.setGreetMessage();
 	// greetings.setNamesGreeted();
 	greetings.countGreetedNames();

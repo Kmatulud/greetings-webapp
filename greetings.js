@@ -51,7 +51,9 @@ module.exports = function Greetings() {
 	}
 
 	function countGreetedNames() {
-		count = greetedNames.length;
+		if (getTheName() != "") {
+			count = greetedNames.length;
+		}
 		return count;
 	} 
 
