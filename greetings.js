@@ -29,11 +29,12 @@ module.exports = function Greetings() {
 		return greetMessage;
 	}
 	function setTheName(name) {
-		nameOfUser = name;
+		nameOfUser =
+			name.charAt(0).toUpperCase() + nameOfUser.toLowerCase().slice(1);
 	}
 	function getTheName() {
 		return (
-			nameOfUser.charAt(0).toUpperCase() + nameOfUser.toLowerCase().slice(1)
+			nameOfUser
 		);
 	}
 	// function setNamesGreeted(theNames) {
