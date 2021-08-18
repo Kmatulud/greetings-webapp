@@ -8,7 +8,9 @@ const Greetings = require("./greetings");
 const app = express();
 const greetings = Greetings();
 
+app.use(express.static("public"));
 app.use(express.static("views"));
+
 
 const handlebarSetup = exphbs({
 	partialsDir: "./views/partials",
@@ -48,20 +50,19 @@ app.post("/greetings", (req, res) => {
 
 	let getTheName = greetings.getTheName();
 	let language = greetings.getLanguage();
-	if(getTheName === undefined) {
-		req.flash("error", "Please enter a name!");
+	if(getTheName === "") {
+		req.flash("error", "Please enter your name!");
+	}else if (language === undefined) {
+		req.flash("error", "Please choose a language!");
 	}
-	if(language === undefined) {
-		req.flash("error", "Name and Language cannot be empty!");
-	}
-	// else if (language === undefined && getTheName === undefined) {
-	// 	req.flash("error", "Please choose a language!");
+	// else if (getTheName === "" && language === undefined) {
+	// 	req.flash("error", "Name and language cannot be empty!");
 	// }
+	
 	
 	greetings.setGreetMessage();
 	// greetings.setNamesGreeted();
 	greetings.countGreetedNames();
-
 	greetings.checkNameExist();
 	res.redirect("/");
 });
