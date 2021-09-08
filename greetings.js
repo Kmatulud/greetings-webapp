@@ -68,7 +68,7 @@ module.exports = function Greetings(names) {
 		getTheName,
 		getNamesGreeted,
 		setNamesGreeted,
-		// checkNameExist,
+		checkNameExist,
 		countGreetedNames,
 	};
 };
