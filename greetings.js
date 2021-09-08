@@ -44,12 +44,12 @@ module.exports = function Greetings(names) {
 		return greetedNames;
 	}
 
-	// function checkNameExist() {
-	// 	if (!greetedNames.includes(nameOfUser)) {
-	// 		greetedNames.push(nameOfUser);
-	// 	}
-	// 	return greetedNames;
-	// }
+	function checkNameExist() {
+		if (!greetedNames.includes(nameOfUser)) {
+			greetedNames.push(nameOfUser);
+		}
+		return greetedNames;
+	}
 
 	function countGreetedNames() {
 		if (getTheName() != undefined && getTheName() != "" && getLanguage() != undefined){
@@ -58,7 +58,7 @@ module.exports = function Greetings(names) {
 		return count;
 	}
 
-	
+
 	return {
 		setLanguage,
 		getLanguage,
