@@ -1,7 +1,7 @@
-module.exports = function Greetings() {
+module.exports = function Greetings(names) {
 	var greetMessage;
 	var greetLanguage;
-	var greetedNames = [];
+	var greetedNames = names || [];
 	var nameOfUser;
 	var count = 0;
 
@@ -37,27 +37,28 @@ module.exports = function Greetings() {
 			nameOfUser
 		);
 	}
-	// function setNamesGreeted(theNames) {
-	// 	greetedNames.push(theNames);
-	// }
-	// function getNamesGreeted() {
-	// 	return greetedNames;
-	// }
-
-	function checkNameExist() {
-		if (!greetedNames.includes(nameOfUser)) {
-			greetedNames.push(nameOfUser);
-		}
+	function setNamesGreeted() {
+		greetedNames.push(nameOfUser);
+	}
+	function getNamesGreeted() {
 		return greetedNames;
 	}
 
+	// function checkNameExist() {
+	// 	if (!greetedNames.includes(nameOfUser)) {
+	// 		greetedNames.push(nameOfUser);
+	// 	}
+	// 	return greetedNames;
+	// }
+
 	function countGreetedNames() {
-		if (getTheName() != "") {
+		if (getTheName() != undefined && getTheName() != "" && getLanguage() != undefined){
 			count = greetedNames.length;
 		}
 		return count;
-	} 
+	}
 
+	
 	return {
 		setLanguage,
 		getLanguage,
@@ -65,9 +66,9 @@ module.exports = function Greetings() {
 		getGreetMessage,
 		setTheName,
 		getTheName,
-		// getNamesGreeted,
-		// setNamesGreeted,
-		checkNameExist,
+		getNamesGreeted,
+		setNamesGreeted,
+		// checkNameExist,
 		countGreetedNames,
 	};
 };
