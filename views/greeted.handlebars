@@ -1,27 +1,12 @@
 {{!-- <div class="wrapper"> --}}
-<h1>Users</h1>
-<table>
-    <tr>
-       <th> User</th>
-        <th>Greetings Counter</th>
-        <th>Time</th>
-    </tr>
+<h1>Greeted users</h1>
+<h4>Please click on each user to see how many times they've been greeted</h4>
+
+{{!-- <p>Please click on a user to see how many times they have been greeted</p> --}}
+<ul>
     {{#each nameList}}
-        <tr>
-            <td>{{this.user_name}}</td>
-            <td>{{this.counter}}</td>
-            {{!-- <th>Time</th> --}}
-        </tr>
-    {{!-- <tr>
-        <td><a href="{{this.user_name}}">{{this.user_name}}</a></td>
-    </tr>
-    <tr>
-        <td><a href="{{this.counter}}">{{this.counter}}</a></td>
-    </tr> --}}
-    {{!-- <tr>
-        <td><a href="{{this.user_name}}">{{this.user_name}}</a></td>
-    </tr> --}}
-    
+        <li><a href="/counter">{{this.user_name}}</a></li>
     {{/each}}
-</table>
+</ul>
+
 {{!-- </div> --}}
