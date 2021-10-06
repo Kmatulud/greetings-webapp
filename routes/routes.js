@@ -35,7 +35,9 @@ module.exports = function GreetMe() {
 				countGreetedNames: names.length,
 			});
 		} catch (error) {
-			res.render("index", { countGreetedNames: names.length });
+			// res.render("index", { countGreetedNames: names.length });
+			console.log(error)
+
 		}
 	}
 	let greeted = async function (req, res) {
@@ -47,7 +49,9 @@ module.exports = function GreetMe() {
 				nameList: newdata,
 			});
 		} catch (error) {
-			res.render("greeted");
+			// res.render("greeted");
+			console.log(error)
+
 		}
 	};
 	async function greetedCount(req, res) {
@@ -58,7 +62,8 @@ module.exports = function GreetMe() {
 				namesList: newdata,
 			});
 		} catch (error) {
-			res.render("counter");
+			// res.render("counter");
+			console.log(error)
 		}
 	}
 
@@ -77,7 +82,6 @@ module.exports = function GreetMe() {
 			"select user_name from users where user_name = $1",
 			[getTheName]
 		);
-		try {
 			if (checkName.rowCount < 1) {
 				await pool.query(
 					"insert into users(user_name, greet_msg, counter)values($1,$2,$3)",
@@ -89,9 +93,7 @@ module.exports = function GreetMe() {
 					[getTheName]
 				);
 			}
-		} catch (error) {
-			console.log(error)
-		}
+		
 		greetings.setNamesGreeted(req.body.name);
 		res.redirect("/");
 	}
