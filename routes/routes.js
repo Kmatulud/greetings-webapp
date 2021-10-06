@@ -18,7 +18,7 @@ const pool = new Pool({
 });
 
 module.exports = function GreetMe() {
-	async function home(req, res) {
+	async function home(req, res, next) {
 		var data = await pool.query("select * from users");
 		var newdata = data.rows[data.rows.length - 1];
 		var names = [];
@@ -40,7 +40,7 @@ module.exports = function GreetMe() {
 
 		}
 	}
-	let greeted = async function (req, res) {
+	let greeted = async function (req, res, next) {
 		var data = await pool.query("select * from users");
 		var newdata = data.rows;
 
@@ -54,7 +54,7 @@ module.exports = function GreetMe() {
 
 		}
 	};
-	async function greetedCount(req, res) {
+	async function greetedCount(req, res, next) {
 		var data = await pool.query("select * from users");
 		var newdata = data.rows;
 		try {
@@ -67,7 +67,7 @@ module.exports = function GreetMe() {
 		}
 	}
 
-	async function greetMsg(req, res) {
+	async function greetMsg(req, res, next) {
 		greetings.setTheName(req.body.name);
 		greetings.setLanguage(req.body.language);
 
@@ -98,7 +98,7 @@ module.exports = function GreetMe() {
 		res.redirect("/");
 	}
 
-	async function deleteUsers(req, res) {
+	async function deleteUsers(req, res, next) {
 		await pool.query("delete from users");
 		res.redirect("/");
 	}
