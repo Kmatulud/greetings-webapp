@@ -77,18 +77,21 @@ module.exports = function GreetMe() {
 			"select user_name from users where user_name = $1",
 			[getTheName]
 		);
-		if (checkName.rowCount < 1) {
-			await pool.query(
-				"insert into users(user_name, greet_msg, counter)values($1,$2,$3)",
-				[getTheName, greetMsg, 1]
-			);
-		} else {
-			await pool.query(
-				"update users set counter=counter+1 where user_name = $1",
-				[getTheName]
-			);
+		try {
+			if (checkName.rowCount < 1) {
+				await pool.query(
+					"insert into users(user_name, greet_msg, counter)values($1,$2,$3)",
+					[getTheName, greetMsg, 1]
+				);
+			} else {
+				await pool.query(
+					"update users set counter=counter+1 where user_name = $1",
+					[getTheName]
+				);
+			}
+		} catch (error) {
+			console.log(error)
 		}
-
 		greetings.setNamesGreeted(req.body.name);
 		res.redirect("/");
 	}
@@ -97,19 +100,19 @@ module.exports = function GreetMe() {
 		await pool.query("delete from users");
 		res.redirect("/");
 	}
-    async function validName(){
-        if (getTheName === "") {
-			req.flash("error", "Please enter your name!");
-		} else if (language === undefined) {
-			req.flash("error", "Please choose a language!");
-			}
-        }
+    // async function validName(){
+    //     if (getTheName === "") {
+	// 		req.flash("error", "Please enter your name!");
+	// 	} else if (language === undefined) {
+	// 		req.flash("error", "Please choose a language!");
+	// 		}
+    //     }
     return {
 			home,
 			greeted,
 			greetedCount,
 			greetMsg,
 			deleteUsers,
-			validName,
+			// validName,
 		};
 };
