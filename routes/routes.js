@@ -38,7 +38,7 @@ module.exports = function GreetMe() {
 			});
 		} catch (error) {
 			res.render("index", { countGreetedNames: names.length });
-			console.log(error)
+			// console.log(error)
 
 		}
 
@@ -66,7 +66,7 @@ module.exports = function GreetMe() {
 			});
 		} catch (error) {
 			res.render("counter");
-			console.log(error)
+			// console.log(error)
 		}
 	}
 
