@@ -41,7 +41,7 @@ module.exports = function Greetings(names) {
 		greetedNames.push(nameOfUser);
 	}
 	function getNamesGreeted() {
-		return greetedNames;
+		return greetedNames.length;
 	}
 
 	function checkNameExist() {
@@ -50,14 +50,6 @@ module.exports = function Greetings(names) {
 		}
 		return greetedNames;
 	}
-
-	function countGreetedNames() {
-		if (getTheName() != undefined && getTheName() != "" && getLanguage() != undefined){
-			count = greetedNames.length;
-		}
-		return count;
-	}
-
 
 	return {
 		setLanguage,
@@ -69,6 +61,5 @@ module.exports = function Greetings(names) {
 		getNamesGreeted,
 		setNamesGreeted,
 		checkNameExist,
-		countGreetedNames,
 	};
 };

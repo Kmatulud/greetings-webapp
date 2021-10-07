@@ -1,15 +1,28 @@
-var express = require("express");
-var exphbs = require("express-handlebars");
-var bodyParser = require("body-parser");
-var dotenv = require("dotenv").config();
-var GreetMe = require("./routes/routes")
+const express = require("express");
+const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
+const GreetMe = require("./routes/routes")
 const flash = require("express-flash");
 const session = require("express-session");
 
-
-let greetMe = GreetMe();
-
 const app = express();
+
+const pg = require("pg");
+const Pool = pg.Pool;
+
+let useSSL = false;
+let local = process.env.LOCAL || false;
+if (process.env.DATABASE_URL && !local) {
+	useSSL = true;
+}
+// which db connection to use
+const connectionString =
+	process.env.DATABASE_URL ||
+	"postgresql://postgres:3201@localhost:5432/greetingswebapp";
+const pool = new Pool({
+	connectionString,
+	ssl: useSSL,
+});
 
 app.use(express.static("public"));
 app.use(express.static("views"));
@@ -37,10 +50,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
 app.use(bodyParser.json());
 
+
+// const greetings = Greetings();
+const greetMe = GreetMe();
+
 app.get("/", greetMe.home);
 app.get("/greeted", greetMe.greeted);
 app.get("/counter", greetMe.greetedCount);
-app.post("/greetings", greetMe.greetMsg);
+app.post("/greetings", greetMe.greetingMsg);
 app.get("/delete", greetMe.deleteUsers);
 
 const PORT = process.env.PORT || 3000;
