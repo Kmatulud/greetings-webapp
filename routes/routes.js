@@ -3,18 +3,18 @@ const Greetings = require("../greetings");
 const pg = require("pg");
 const Pool = pg.Pool;
 
-let useSSL = false;
-let local = process.env.LOCAL || false;
-if (process.env.DATABASE_URL && !local) {
-	useSSL = true;
-}
+// let useSSL = false;
+// let local = process.env.LOCAL || false;
+// if (process.env.DATABASE_URL && !local) {
+// 	useSSL = true;
+// }
 // which db connection to use
 const connectionString =
 	process.env.DATABASE_URL ||
 	"postgres://jflgvlaykiztti:bd6e9b2986f57e9445790e42484f9a38c6c6e9ee36b97634e97d7651a3bb959a@ec2-34-203-91-150.compute-1.amazonaws.com:5432/d7p9oilcmevko";
 const pool = new Pool({
 	connectionString,
-	ssl: useSSL,
+	ssl: { rejectUnauthorized: false},
 });
 
 const greetings = Greetings(pool);
