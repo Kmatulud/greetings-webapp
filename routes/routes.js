@@ -75,31 +75,32 @@ module.exports = function GreetMe() {
 		greetings.setLanguage(req.body.language);
         greetings.setGreetMessage();
 
-		if(!req.body.language && req.body.name == ""){
-            req.flash('error', 'Please enter name and language')
-            res.redirect("/")
-            return
-        }
-		else if(!req.body.name.match(/^[a-zA-Z]{3,15}$/gi)){
-            req.flash('error', 'Please enter a valid name')
-            res.redirect("/")
-            return
-        }
-		else if(req.body.name == ""){
-            req.flash('error', 'Please enter your name')
-            res.redirect("/")
-            return
-        }
-		else if(!req.body.language){
-            req.flash('error', 'Please a choose language')
-            res.redirect("/")
-            return
-        }
-		
 		let getTheName = greetings.getTheName();
 		let greetMsg = greetings.getGreetMessage();
 
 		let language = greetings.getLanguage();
+		if(!language && getTheName == ""){
+            req.flash('error', 'Please enter name and language')
+            res.redirect("/")
+            return
+        }else if(getTheName == ""){
+            req.flash('error', 'Please enter your name')
+            res.redirect("/")
+            return
+        }else if(!language){
+            req.flash('error', 'Please a choose language')
+            res.redirect("/")
+            return
+        }else if(!getTheName.match(/^[a-zA-Z]{3,15}$/gi)){
+            req.flash('error', 'Please enter a valid name')
+            res.redirect("/")
+            return
+        }
+		
+		
+		
+		
+		
 		var checkName = await pool.query(
 			"select user_name from users where user_name = $1",
 			[getTheName]
