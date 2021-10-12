@@ -11,7 +11,7 @@ if (process.env.DATABASE_URL && !local) {
 // which db connection to use
 const connectionString =
 	process.env.DATABASE_URL ||
-	"postgresql://postgres:3201@localhost:5432/greetingswebapp";
+	"ec2-34-203-91-150.compute-1.amazonaws.com://jflgvlaykiztti:3201@localhost:bd6e9b2986f57e9445790e42484f9a38c6c6e9ee36b97634e97d7651a3bb959a/d7p9oilcmevko";
 const pool = new Pool({
 	connectionString,
 	ssl: useSSL,
