@@ -24,9 +24,7 @@ const greetings = Greetings(pool);
 const greetMe = GreetMe(pool);
 
 describe('The greetings app database tests', function () {
-    beforeEach(async ()=>{
-        await pool.query("delete from users")
-    })
+    
     it('should set the names and get them from database', async ()=> {
         await greetings.setTheName("Kgotso")
         assert.deepEqual("Kgotso", greetings.getTheName())
@@ -53,7 +51,4 @@ describe('The greetings app database tests', function () {
     //     await greetings.setNamesGreeted("kgotso")
     //     assert.strictEqual("kgotso", await greetings.deleteNames())
     // });
-    after(()=>{
-        pool.end;
-    })
 });
