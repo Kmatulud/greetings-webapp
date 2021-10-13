@@ -10,11 +10,6 @@ const app = express();
 const pg = require("pg");
 const Pool = pg.Pool;
 
-// let useSSL;
-// let local = process.env.LOCAL || false;
-// if (process.env.DATABASE_URL && !local) {
-// 	useSSL = true;
-// }
 // // which db connection to use
 const connectionString =
 	process.env.DATABASE_URL ||
@@ -59,6 +54,8 @@ app.get("/greeted", greetMe.greeted);
 app.get("/counter", greetMe.greetedCount);
 app.post("/greetings", greetMe.greetingMsg);
 app.get("/delete", greetMe.deleteUsers);
+app.get("/delete", greetMe.deleteUsers);
+app.get("/back", greetMe.back);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

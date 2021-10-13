@@ -26,7 +26,7 @@ body{
     letter-spacing: 1.5rem;
 }
 .error{
-    color: red;
+    color: orange;
     text-align: center;
     text-transform: uppercase;
     padding: .5rem;
@@ -83,25 +83,34 @@ input[type="radio"]{
     text-align: center;
     font-size: 1.5rem;
 }
-.counter-section #reset {
+#reset {
     border: 0;
     display: block;
     color: #710844;
     border-radius: 2rem;
     background-color: aqua;
     padding: 0.5rem 1rem;
-    width: 50%;
+    width: 5rem;
     margin: auto;
+    
+}
+#reset a{
+    text-decoration: none;
+    text-align: center;
+
 }
 
-#reset:hover{
-    color: #ffffff;
+#reset a:hover{
+    color: wheat;
     cursor: pointer;
+}
+ul{
+    display:inline;
 }
 ul li{
     list-style: none;
     margin-bottom: .5rem;
-
+    text-align: center;
 }
 h4{
     text-align: center;

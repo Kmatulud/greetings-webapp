@@ -3,11 +3,6 @@ const Greetings = require("../greetings");
 const pg = require("pg");
 const Pool = pg.Pool;
 
-// let useSSL = false;
-// let local = process.env.LOCAL || false;
-// if (process.env.DATABASE_URL && !local) {
-// 	useSSL = true;
-// }
 // which db connection to use
 const connectionString =
 	process.env.DATABASE_URL ||
@@ -62,7 +57,7 @@ module.exports = function GreetMe() {
 		var newdata = data.rows;
 		try {
 			res.render("counter", {
-				namesList: newdata,
+				nameList: newdata,
 			});
 		} catch (error) {
 			res.render("counter");
@@ -115,20 +110,27 @@ module.exports = function GreetMe() {
 		res.redirect("/");
 	}
 
-	 const deleteUsers = async (req, res) => {
+	const deleteUsers = async (req, res) => {
 		await pool.query("delete from users");
+		req.flash('error', 'reset successful!')
+		res.redirect("/");
+		return
+	}
+	const back = (req, res) => {
 		res.redirect("/");
 	}
 	async function countGreetedNames() {
 		let names = await pool.query("select * from users")
-		return names.rowCount;
+		let namess = names.rows;
+		return namess.user_name;
 	}
 	async function countGreetMsg(){
 		let count = await pool.query("select counter from users where name=$1", [user_name])
-		return count.rows[0].count;
+		return count.rows[0];
 	}
     return {
 			home,
+			back,
 			greeted,
 			greetedCount,
 			greetingMsg,

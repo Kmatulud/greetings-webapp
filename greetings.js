@@ -1,7 +1,7 @@
-module.exports = function Greetings(names) {
+module.exports = function Greetings() {
 	var greetMessage;
 	var greetLanguage;
-	var greetedNames = names || [];
+	var greetedNames = [];
 	var nameOfUser;
 	var count = 0;
 
@@ -38,7 +38,8 @@ module.exports = function Greetings(names) {
 		);
 	}
 	function setNamesGreeted() {
-		greetedNames.push(nameOfUser);
+		if (!greetedNames.includes(nameOfUser))
+			greetedNames.push(nameOfUser);
 	}
 	function getNamesGreeted() {
 		return greetedNames.length;
@@ -50,6 +51,10 @@ module.exports = function Greetings(names) {
 		}
 		return greetedNames;
 	}
+	function deleteNames() {
+		return greetedNames.pop();
+	}
+
 
 	return {
 		setLanguage,
@@ -61,5 +66,6 @@ module.exports = function Greetings(names) {
 		getNamesGreeted,
 		setNamesGreeted,
 		checkNameExist,
+		deleteNames
 	};
 };
