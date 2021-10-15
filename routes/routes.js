@@ -15,118 +15,76 @@ const pool = new Pool({
 const greetings = Greetings(pool);
 
 module.exports = function GreetMe() {
-	const home = async (req, res, next) => {
-		var data = await pool.query("select * from users");
-		var newdata = data.rows[data.rows.length - 1];
-		var names = [];
-		data.rows.forEach((obj) => {
-			if (names.indexOf(obj.user_name) === -1) {
-				names.push(obj.user_name);
-			} else {
-			}
-		});
-		try {
-			res.render("index", {
-				getTheName: newdata.user_name,
-				language: newdata.greet_msg,
-				countGreetedNames: names.length,
-			});
-		} catch (error) {
-			res.render("index", { countGreetedNames: names.length });
-			// console.log(error)
 
-		}
-
-	}
-	let greeted = async function (req, res, next) {
-		var data = await pool.query("select * from users");
-		var newdata = data.rows;
-
-		try {
-			res.render("greeted", {
-				nameList: newdata,
-			});
-		} catch (error) {
-			res.render("greeted");
-			// console.log(error)
-
-		}
-	};
-	 const greetedCount = async (req, res, next) => {
-		var data = await pool.query("select * from users");
-		var newdata = data.rows;
-		try {
-			res.render("counter", {
-				nameList: newdata,
-			});
-		} catch (error) {
-			res.render("counter");
-			// console.log(error)
-		}
+	const home = async(req, res)=>{
+		greetings.nameCount()
+		.then(result => {
+			res.render('index',{
+				getTheName: greetings.getTheName(),
+				language: greetings.getGreetMessage(),
+				countGreetedNames: result
+			})
+			
+		})
+		.catch(error => console.log(error))
 	}
 
-	const greetingMsg = async (req, res) => {
+	async function greeted(req, res) {
+		greetings.nameList()
+			.then(result => {
+				res.render('greeted', {
+					nameList: result
+				});
+			})
+			.catch(error => console.log(error));
+	}
+
+	async function greetedCount(req, res) {
+		greetings.greetingCount()
+			.then(result => {
+				res.render('counter', {
+					greetedName: greetings.getTheName(),
+					greetCount: result
+				});
+			})
+			.catch(error => console.log(error));
+	}
+	async function greetingMsg(req, res) {
 		greetings.setTheName(req.body.name);
 		greetings.setLanguage(req.body.language);
-        greetings.setGreetMessage();
+		greetings.setGreetMessage();
 
 		let getTheName = greetings.getTheName();
 		let greetMsg = greetings.getGreetMessage();
 
 		let language = greetings.getLanguage();
-		if(!language && getTheName == ""){
-            req.flash('error', 'Please enter name and language')
-            res.redirect("/")
-            return
-        }else if(getTheName == ""){
-            req.flash('error', 'Please enter your name')
-            res.redirect("/")
-            return
-        }else if(!language){
-            req.flash('error', 'Please a choose language')
-            res.redirect("/")
-            return
-        }else if(!getTheName.match(/^[a-zA-Z]{3,15}$/gi)){
-            req.flash('error', 'Please enter a valid name')
-            res.redirect("/")
-            return
-        }
-		
-		var checkName = await pool.query(
-			"select user_name from users where user_name = $1",
-			[getTheName]
-		);
-			if (checkName.rowCount < 1) {
-				await pool.query( 
-					"insert into users(user_name, greet_msg, counter)values($1,$2,$3)",
-					[getTheName, greetMsg, 1]
-				);
-			} else {
-				await pool.query(
-					"update users set counter=counter+1 where user_name = $1",
-					[getTheName]
-				);
-			}
+		if (!language && getTheName == "") {
+			req.flash('error', 'Please enter name and language');
+			res.redirect("/");
+			return;
+		} else if (getTheName == "") {
+			req.flash('error', 'Please enter your name');
+			res.redirect("/");
+			return;
+		} else if (!language) {
+			req.flash('error', 'Please a choose language');
+			res.redirect("/");
+			return;
+		} else if (!getTheName.match(/^[a-zA-Z]{3,15}$/gi)) {
+			req.flash('error', 'Please enter a valid name');
+			res.redirect("/");
+			return;
+		}
 		res.redirect("/");
 	}
 
-	const deleteUsers = async (req, res) => {
-		await pool.query("delete from users");
-		req.flash('error', 'reset successful!')
+	async function deleteUsers(req, res) {
+		greetings.removeUsers();
+		req.flash('error', 'reset successful');
+		res.redirect('/');
+	}
+	function back(req, res) {
 		res.redirect("/");
-		return
-	}
-	const back = (req, res) => {
-		res.redirect("/");
-	}
-	async function countGreetedNames() {
-		let names = await pool.query("select * from users")
-		let namess = names.rows;
-		return namess.user_name;
-	}
-	async function countGreetMsg(){
-		let count = await pool.query("select counter from users where name=$1", [user_name])
-		return count.rows[0];
 	}
     return {
 			home,
@@ -135,7 +93,5 @@ module.exports = function GreetMe() {
 			greetedCount,
 			greetingMsg,
 			deleteUsers,
-			countGreetedNames,
-			countGreetMsg,
 		};
 };

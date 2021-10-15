@@ -1,9 +1,7 @@
-module.exports = function Greetings() {
+module.exports = function Greetings(pool) {
 	var greetMessage;
 	var greetLanguage;
-	var greetedNames = [];
-	var nameOfUser;
-	var count = 0;
+	var nameOfUser = "";
 
 	function setLanguage(language) {
 		greetLanguage = language;
@@ -28,33 +26,34 @@ module.exports = function Greetings() {
 	function getGreetMessage() {
 		return greetMessage;
 	}
-	function setTheName(name) {
-		nameOfUser =
-			name.charAt(0).toUpperCase() + name.toLowerCase().slice(1).trim();
+	async function setTheName(name) {
+		nameOfUser = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1).trim();
+		await pool.query(
+			"insert into users values($1)",
+			[nameOfUser]
+		);
 	}
 	function getTheName() {
 		return (
 			nameOfUser
 		);
 	}
-	function setNamesGreeted() {
-		if (!greetedNames.includes(nameOfUser))
-			greetedNames.push(nameOfUser);
+	async function nameCount() {
+		var names = await pool.query("select count(distinct user_name) from users");
+		return names.rows[0].count;
 	}
-	function getNamesGreeted() {
-		return greetedNames.length;
+	async function greetingCount() {
+		let count = await pool.query("select count(*) from users where user_name=$1", [nameOfUser]);
+		return count.rows[0].count;
 	}
-
-	function checkNameExist() {
-		if (!greetedNames.includes(nameOfUser)) {
-			greetedNames.push(nameOfUser);
-		}
-		return greetedNames;
+	async function nameList() {
+		var data = await pool.query("select distinct user_name from users");
+		return data.rows;
 	}
-	function deleteNames() {
-		return greetedNames.pop();
+	
+	async function removeUsers(req, res) {
+		await pool.query('delete from users');
 	}
-
 
 	return {
 		setLanguage,
@@ -63,9 +62,9 @@ module.exports = function Greetings() {
 		getGreetMessage,
 		setTheName,
 		getTheName,
-		getNamesGreeted,
-		setNamesGreeted,
-		checkNameExist,
-		deleteNames
+		removeUsers,
+		greetingCount,
+		nameCount,
+		nameList
 	};
 };
